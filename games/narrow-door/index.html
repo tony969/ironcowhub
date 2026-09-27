@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Narrow Door: Green Arc | Iron Cow Productions</title>
+<meta name="description" content="A learning game from A Origin Story. Fix a failing colony greenhouse.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐄</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<style>
+.game{max-width:44rem}
+.meter{margin:1.5rem 0;padding:1rem 1.25rem;background:var(--surface);border:1px solid var(--line);border-radius:3px}
+.meter-top{display:flex;justify-content:space-between;font:700 1.15rem/1 var(--display);letter-spacing:.03em}
+.bar{height:.8rem;background:var(--line);border-radius:2px;margin-top:.6rem;overflow:hidden}
+.fill{height:100%;width:41%;background:var(--bad);transition:width 1.6s ease, background-color 1.6s ease}
+.fill.ok{background:var(--ok)}
+.mission h2{font-size:2.2rem;margin:.5rem 0}
+.orion{border-left:3px solid var(--brass);padding:.25rem 0 .25rem 1rem;margin:1.25rem 0;font-style:italic}
+.orion b{font-style:normal;font-family:var(--display);letter-spacing:.03em}
+.choices{display:grid;gap:.6rem;margin:1.25rem 0}
+.choice{text-align:left;font:400 1.05rem/1.4 var(--body);color:var(--ink);background:var(--surface);
+  border:2px solid var(--line);border-radius:3px;padding:.85rem 1rem;cursor:pointer}
+.choice:hover:not(:disabled){border-color:var(--ink)}
+.choice.wrong{border-color:var(--bad);color:var(--muted);text-decoration:line-through}
+.choice.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,var(--surface))}
+.choice:disabled{cursor:default}
+.feedback{min-height:1.5rem;font-size:1.05rem}
+.locked{margin-top:2.5rem;border-top:2px solid var(--ink)}
+.locked li{display:flex;justify-content:space-between;gap:1rem;padding:.9rem 0;border-bottom:1px solid var(--line);color:var(--muted)}
+.locked ol{list-style:none;margin:0;padding:0}
+.locked li b{font-family:var(--display);font-size:1.2rem;color:var(--ink)}
+.locked li.open b{color:var(--ok)}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <a class="brand" href="/">Iron Cow <span>Productions</span></a>
+  <nav aria-label="Main"><a href="/">Home</a><a href="/books/">Books</a><a href="/podcast/">Podcast</a><a href="/stories/">Stories</a><a href="/games/narrow-door/" aria-current="page">The Narrow Door</a><a href="/gear/">Gear</a><a href="/about/">About</a></nav>
+</header>
+<main id="main">
+
+<section class="page-head">
+  <h1>The Narrow Door: Green Arc</h1>
+  <p>A colony greenhouse is failing. The water loop is broken. Plant health is dropping. Orion will guide you, but Orion will not give you the answer. Learn the system. Fix the loop. Open the next door.</p>
+</section>
+<section class="game">
+  <div class="meter" aria-live="polite">
+    <div class="meter-top"><span>Plant health</span><span id="pct">41%</span></div>
+    <div class="bar"><div class="fill" id="fill"></div></div>
+  </div>
+  <div class="mission">
+    <p class="status">Mission 1</p>
+    <h2>The broken loop</h2>
+    <p>Water pools in the bottom tray and never makes it back to the tank. The pump is running dry. The top beds are wilting. What do you do first?</p>
+    <p class="orion"><b>Orion:</b> <span id="hint">Every system has a path. Follow the water before you touch anything.</span></p>
+    <div class="choices">
+      <button class="choice" data-k="a">A. Add more seeds</button>
+      <button class="choice" data-k="b">B. Lower the return line</button>
+      <button class="choice" data-k="c">C. Turn up the grow lights</button>
+      <button class="choice" data-k="d">D. Water the top beds by hand</button>
+    </div>
+    <p class="feedback" id="feedback" aria-live="polite"></p>
+  </div>
+  <div class="locked">
+    <ol>
+      <li id="door1"><b>Mission 1: The broken loop</b><span>Open</span></li>
+      <li><b>Mission 2</b><span>Opens soon</span></li>
+      <li><b>Mission 3</b><span>Opens soon</span></li>
+      <li><b>Mission 4</b><span>Opens soon</span></li>
+      <li><b>Mission 5</b><span>Opens soon</span></li>
+    </ol>
+  </div>
+  <p class="find">The story starts in the book <em>The Narrow Door</em>. <a href="/stories/">More from A Origin Story</a></p>
+</section>
+
+</main>
+<footer class="site-foot">
+  <p>Iron Cow Productions, Martinsville, Virginia.</p>
+  <p>There will never be another you.</p>
+  <p><a href="https://beacons.ai/tony969">All links on Beacons</a></p>
+</footer>
+<script>
+(function(){
+  var CORRECT = "b";
+  var FEEDBACK = {
+    a: "New seeds need water too. The loop is still broken.",
+    c: "More light dries the beds out faster. The loop is still broken.",
+    d: "That saves a few plants today. Tomorrow the loop is still broken."
+  };
+  var HINTS = [
+    "Water only moves one way on its own. Downhill. Where does the water in this loop need to go next?",
+    "Look at where the water stops. What sits between the pooled water and the tank?",
+    "The return line sits above the pooled water. Water will not climb to reach it."
+  ];
+  var wrong = 0;
+  var fill = document.getElementById("fill");
+  var pct = document.getElementById("pct");
+  var fb = document.getElementById("feedback");
+  var hint = document.getElementById("hint");
+  var buttons = document.querySelectorAll(".choice");
+  var door1 = document.getElementById("door1");
+
+  function solved(showMotion){
+    buttons.forEach(function(b){ b.disabled = true; if(b.dataset.k === CORRECT){ b.classList.add("right"); }});
+    fill.classList.add("ok");
+    fill.style.width = "92%";
+    pct.textContent = "92%";
+    fb.textContent = "The water drains back to the tank. The pump catches it and the top beds drink. Door 1 is open.";
+    door1.classList.add("open");
+    door1.querySelector("span").textContent = "Complete";
+  }
+
+  var saved = false;
+  try { saved = localStorage.getItem("narrowdoor-m1") === "done"; } catch(e){}
+  if(saved){ solved(false); return; }
+
+  buttons.forEach(function(b){
+    b.addEventListener("click", function(){
+      var k = b.dataset.k;
+      if(k === CORRECT){
+        solved(true);
+        try { localStorage.setItem("narrowdoor-m1","done"); } catch(e){}
+        return;
+      }
+      b.classList.add("wrong");
+      b.disabled = true;
+      wrong++;
+      fb.textContent = FEEDBACK[k];
+      var i = Math.min(wrong, HINTS.length) - 1;
+      hint.textContent = HINTS[i];
+    });
+  });
+})();
+</script>
+</body>
+</html>
