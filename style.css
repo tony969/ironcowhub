@@ -80,6 +80,21 @@ main{padding:0 clamp(1rem,4vw,3rem) 4rem;max-width:72rem;margin:0 auto}
 .item p{margin:.5rem 0}
 .find{margin-top:2rem;color:var(--muted)}
 .prose{max-width:62ch;font-size:1.125rem}
+.prose h2{font-size:1.9rem;margin:2rem 0 .5rem}
+
+/* Podcast: mission block, breadcrumbs, episode summaries */
+.mission{max-width:62ch;margin:0 0 2.5rem;padding:1.25rem 1.4rem;background:var(--plate);color:var(--plate-ink);border-radius:4px;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06), inset 0 -12px 30px rgba(0,0,0,.3)}
+.mission p{margin:0;font-size:1.125rem}
+.mission .sub-links{margin-top:1rem;font:600 1rem/1.4 var(--display);letter-spacing:.02em}
+.mission a{color:var(--brass)}
+.crumb{margin:0 0 .5rem!important;font:600 .95rem/1 var(--display);letter-spacing:.04em;text-transform:uppercase}
+.crumb a{color:var(--muted);text-decoration:none}
+.crumb a:hover{color:var(--ink);text-decoration:underline}
+.show-head{font-size:2.2rem;margin:2.5rem 0 .5rem;padding-top:1rem;border-top:2px solid var(--ink)}
+.episode h3{font-family:var(--display);font-weight:800;font-size:1.6rem;line-height:1.08;margin:.25rem 0 .5rem}
+.ep-meta{margin:0!important;font:600 .9rem/1 var(--display);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.ep-links{margin-top:.75rem!important}
 
 .gear{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink);max-width:52rem}
 .gear-item{display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:center;justify-content:space-between;padding:1.4rem 0;border-bottom:1px solid var(--line)}
